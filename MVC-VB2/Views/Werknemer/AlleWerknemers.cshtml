@@ -1,0 +1,16 @@
+﻿@model List<MVC_VB2.Models.Wernemer>
+
+@{
+    ViewBag.Title = "AlleWerknemers";
+}
+
+<h2>AlleWerknemers</h2>
+
+@foreach (var wernemer in Model)
+{
+    <p>@wernemer.naam verdient @String.Format("{0:c}", @wernemer.Wedde) en indienst sinds @wernemer.InDienst</p>
+}
+
+@section scripts{
+    <p>Hier wat scripts</p>
+    }

@@ -1,0 +1,15 @@
+﻿@model List<MVC_VB2.Models.Bier>
+
+@{
+    ViewBag.Title = "Bieren";
+}
+
+<h2>Bieren</h2>
+<ul>
+@foreach (var bier in Model)
+{
+    <li>
+        @bier.ID   @bier.Naam / @bier.Alcohol %
+    </li>
+}
+</ul>

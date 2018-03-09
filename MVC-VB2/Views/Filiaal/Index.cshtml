@@ -1,0 +1,11 @@
+﻿@model List<MVC_VB2.Models.Filiaal>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+@Html.Partial("HoofdZetel")
+@Html.Partial("Filialen")
+@Html.Partial("FilialenVanaf2Mil", Model.Where(x => x.Waarde >= 2000000))
