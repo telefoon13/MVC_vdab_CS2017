@@ -9,3 +9,4 @@
 @Html.Partial("HoofdZetel")
 @Html.Partial("Filialen")
 @Html.Partial("FilialenVanaf2Mil", Model.Where(x => x.Waarde >= 2000000))
+@Html.Action("ShowTime", "Time")
