@@ -11,7 +11,37 @@ namespace MVC_VB2.Controllers
     {
         public ActionResult Index()
         {
+            String resultaat = "Welkom dit is je eerste bezoek.";
+            if (Request.Cookies != null)
+            {
+                if (Request.Cookies["lastVisit"] != null)
+                {
+                    resultaat = "Welkom terug. Jouw laatste bezoek was op " + Request.Cookies["lastVisit"]["tijdstip"] + ". Jouw voorkeurtaal is " + Request.Cookies["lastVisit"]["taal"] + ".";
+                }
+
+                String laatsteBezoek = DateTime.Now.ToString();
+                var userCookie = new HttpCookie("lastVisit");
+                userCookie["tijdstip"] = laatsteBezoek;
+                userCookie["taal"] = Request.UserLanguages[0];
+                userCookie.Expires = DateTime.Now.AddYears(1);
+                Response.Cookies.Add(userCookie);
+            }
+            ViewBag.Tijdstip = resultaat;
             return View(new Persoon { Voornaam = "Mike", Achternaam = "D'hoore" });
+        }
+
+        public ActionResult Wissen()
+        { //zijn er cookies?
+            if (Request.Cookies != null)
+            {
+                //is er een cookies met de naam "lastvisit"?
+                if (Request.Cookies["lastVisit"] != null)
+                {
+                    Request.Cookies["lastVisit"].Expires = DateTime.Now.AddDays(-1);
+                    Response.Cookies.Add(Request.Cookies["lastVisit"]);
+                }
+            }
+            return View();
         }
 
         public ActionResult About()
@@ -32,15 +62,15 @@ namespace MVC_VB2.Controllers
         {
             char[] omgekeerd = woord.ToCharArray();
             Array.Reverse(omgekeerd);
-            string achterstevoren = new string(omgekeerd); 
+            string achterstevoren = new string(omgekeerd);
 
             if (woord == achterstevoren)
                 ViewBag.palindroom = true;
             else
                 ViewBag.palindroom = false;
-            
-            ViewBag.ingetiktwoord = woord; 
+
+            ViewBag.ingetiktwoord = woord;
             return View();
-}
-}
+        }
+    }
 }
