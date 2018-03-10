@@ -16,6 +16,16 @@ namespace MVC_VB2
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            // Application State
+            Application.Lock();
+            Application.Add("aantalBezoeken", 0);
+            Application.UnLock();
+        }
+
+        protected void Session_Start()
+        {
+            Session["aantalBezoeken"] = 0;
         }
     }
 }

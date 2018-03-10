@@ -7,6 +7,8 @@ using System.Web.Mvc;
 
 namespace MVC_VB2.Controllers
 {
+    // Uitschakelen van Sessions in een volledige controller --> beter performantie
+    //[SessionState(SessionStateBehavior.Disabled)]
     public class HomeController : Controller
     {
         public ActionResult Index()
@@ -28,14 +30,14 @@ namespace MVC_VB2.Controllers
             }
             ViewBag.Tijdstip = resultaat;
 
-            if (this.Session["aantalBezoeken"] == null)
-            {
-                this.Session["aantalBezoeken"] = 1;
-            }
-            else
-            {
-                this.Session["aantalBezoeken"] = (int)this.Session["aantalBezoeken"] + 1;
-            }
+            //Session bezoeken optellen
+            this.Session["aantalBezoeken"] = (int)this.Session["aantalBezoeken"] + 1;
+
+            // Application state variable
+            System.Web.HttpContext.Current.Application.Lock();
+            System.Web.HttpContext.Current.Application["aantalBezoeken"] = (int)System.Web.HttpContext.Current.Application["aantalBezoeken"] + 1;
+            System.Web.HttpContext.Current.Application.UnLock();
+
             return View(new Persoon { Voornaam = "Mike", Achternaam = "D'hoore" });
         }
 
@@ -55,18 +57,29 @@ namespace MVC_VB2.Controllers
 
         public ActionResult WissenSession()
         {
-            if(this.Session["aantalBezoeken"] != null)
-            {
+            // Controle dient niet meer te gebeuren aangezien session word gemaakt in Global.asax
+            // if (this.Session["aantalBezoeken"] != null)
+            // {
                 this.Session["aantalBezoeken"] = null;
                 // Om alle sessies te wissen 
                 // Session.Clear();
                 // Foreach over alles sessies
                 // foreach (object sessionVariabele in Session) { ... };
-            }
+            //}
             return View();
         }
 
-        public ActionResult About()
+        public ActionResult WissenApplication()
+        {
+            //reset applicationvariabele
+            System.Web.HttpContext.Current.Application.Lock();
+            System.Web.HttpContext.Current.Application["aantalBezoeken"] = 0;
+            System.Web.HttpContext.Current.Application.UnLock();
+
+            return View();
+        }
+        
+            public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
 

@@ -215,6 +215,7 @@
     <Content Include="Views\Shared\DisplayTemplates\Decimal.cshtml" />
     <Content Include="Views\Home\Wissen.cshtml" />
     <Content Include="Views\Home\WissenSession.cshtml" />
+    <Content Include="Views\Home\WissenApplication.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
