@@ -9,14 +9,12 @@
     <p>De persoon is : @Model.Achternaam @Model.Voornaam</p>
 </div>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <div class="jumbotron">
-            <h1>Cookies</h1>
-            <p class="lead">@ViewBag.Tijdstip</p>
-            <p><a href="~/Home/Wissen" class="btn btn-primary btn-lg">Cookie wissen &raquo;</a></p>
-        </div>
-    </div>
 
+<div class="jumbotron">
+    <h1>Cookies</h1>
+    <p class="lead">@ViewBag.Tijdstip</p>
+    <p><a href="~/Home/Wissen" class="btn btn-primary btn-lg">Cookie wissen &raquo;</a></p>
+    <h1>Session state</h1>
+    <p class="lead">Welkom, dit is jouw @Session["aantalBezoeken"]e bezoek.</p>
+    <p><a href="~/Home/WissenSession" class="btn btn-primary btn-lg">Sessionvariabele wissen &raquo;</a> </p>
 </div>

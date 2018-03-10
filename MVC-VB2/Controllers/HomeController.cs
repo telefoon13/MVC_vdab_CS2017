@@ -27,6 +27,15 @@ namespace MVC_VB2.Controllers
                 Response.Cookies.Add(userCookie);
             }
             ViewBag.Tijdstip = resultaat;
+
+            if (this.Session["aantalBezoeken"] == null)
+            {
+                this.Session["aantalBezoeken"] = 1;
+            }
+            else
+            {
+                this.Session["aantalBezoeken"] = (int)this.Session["aantalBezoeken"] + 1;
+            }
             return View(new Persoon { Voornaam = "Mike", Achternaam = "D'hoore" });
         }
 
@@ -40,6 +49,19 @@ namespace MVC_VB2.Controllers
                     Request.Cookies["lastVisit"].Expires = DateTime.Now.AddDays(-1);
                     Response.Cookies.Add(Request.Cookies["lastVisit"]);
                 }
+            }
+            return View();
+        }
+
+        public ActionResult WissenSession()
+        {
+            if(this.Session["aantalBezoeken"] != null)
+            {
+                this.Session["aantalBezoeken"] = null;
+                // Om alle sessies te wissen 
+                // Session.Clear();
+                // Foreach over alles sessies
+                // foreach (object sessionVariabele in Session) { ... };
             }
             return View();
         }
