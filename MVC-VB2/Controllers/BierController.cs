@@ -31,13 +31,34 @@ namespace MVC_VB2.Controllers
             var bier = bierService.Read(id);
             this.TempData["bier"] = bier;
             bierService.Delete(id);
-            return Redirect("~/Bier/Verwijderd");
+            return RedirectToAction("Verwijderd");
         }
 
         public ActionResult Verwijderd()
         {
             var bier = (Bier)this.TempData["bier"];
             return View(bier);
+        }
+
+        [HttpGet]
+        public ActionResult Toevoegen()
+        {
+            var bier = new Bier();
+            return View(bier);
+        }
+
+        [HttpPost]
+        public ActionResult Toevoegen(Bier b)
+        {
+            if (this.ModelState.IsValid)
+            {
+                bierService.Add(b);
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View(b);
+            }
         }
     }
 }

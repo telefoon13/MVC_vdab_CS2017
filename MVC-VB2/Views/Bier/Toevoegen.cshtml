@@ -1,0 +1,15 @@
+﻿@model MVC_VB2.Models.Bier
+
+@{
+    ViewBag.Title = "Toevoegen";
+}
+
+<h2>Toevoegen</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.EditorForModel()
+    <input type="submit" value="toevoegen" />
+
+    @Html.ValidationSummary()
+}

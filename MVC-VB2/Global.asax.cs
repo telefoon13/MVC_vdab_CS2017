@@ -12,6 +12,7 @@ namespace MVC_VB2
     {
         protected void Application_Start()
         {
+            //Standaard
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
@@ -21,6 +22,9 @@ namespace MVC_VB2
             Application.Lock();
             Application.Add("aantalBezoeken", 0);
             Application.UnLock();
+
+            // Resources in nederlands
+            DefaultModelBinder.ResourceClassKey = "Messages";
         }
 
         protected void Session_Start()

@@ -38,7 +38,7 @@ namespace MVC_VB2.Controllers
             System.Web.HttpContext.Current.Application["aantalBezoeken"] = (int)System.Web.HttpContext.Current.Application["aantalBezoeken"] + 1;
             System.Web.HttpContext.Current.Application.UnLock();
 
-            return View(new Persoon { Voornaam = "Mike", Achternaam = "D'hoore" });
+            return View();
         }
 
         public ActionResult Wissen()
