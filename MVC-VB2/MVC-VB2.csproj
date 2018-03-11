@@ -157,12 +157,14 @@
     <Compile Include="Models\Persoon.cs" />
     <Compile Include="Models\Wernemer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\BierService.cs" />
     <Compile Include="Services\FiliaalService.cs" />
     <Compile Include="Services\HoofdZetelService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Images\delete.png" />
     <Content Include="Content\Images\eigendom.png" />
     <Content Include="Content\Images\gehuurd.png" />
     <Content Include="Content\Images\ster.png" />
@@ -216,6 +218,11 @@
     <Content Include="Views\Home\Wissen.cshtml" />
     <Content Include="Views\Home\WissenSession.cshtml" />
     <Content Include="Views\Home\WissenApplication.cshtml" />
+    <Content Include="Views\Filiaal\Verwijderen.cshtml" />
+    <Content Include="Views\Filiaal\Verwijderd.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\kleurAlcohol.cshtml" />
+    <Content Include="Views\Bier\Verwijderen.cshtml" />
+    <Content Include="Views\Bier\Verwijderd.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

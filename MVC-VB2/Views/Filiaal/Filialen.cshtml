@@ -3,8 +3,10 @@
 <ul>
     @foreach (var filiaal in Model)
     {
+        var url = "Verwijderen/" + filiaal.ID;
         <li>
             @filiaal.ID @filiaal.Naam @MyHelpers.Milieuscore(filiaal.Gebouwd) @Html.DisplayFor(m => filiaal.Gebouwd) @Html.DisplayFor(m => filiaal.Waarde) @Html.DisplayFor(m => filiaal.Eigenaar)
+            <a href="@url">Verwijder</a>
         </li>
     }
 </ul>

@@ -1,4 +1,5 @@
 ﻿using MVC_VB2.Models;
+using MVC_VB2.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,16 +10,34 @@ namespace MVC_VB2.Controllers
 {
     public class BierController : Controller
     {
+
+        private BierService bierService = new BierService();
+
         // GET: Bier
         public ActionResult Index()
         {
-            var bieren = new List<Bier>();
-            bieren.Add(new Bier { ID = 1, Naam = "Jupiler", Alcohol = 3.5f });
-            bieren.Add(new Bier { ID = 2, Naam = "Maes", Alcohol = 3.1f });
-            bieren.Add(new Bier { ID = 3, Naam = "Duvel", Alcohol = 7.3f });
-            bieren.Add(new Bier { ID = 4, Naam = "West Malle", Alcohol = 4.5f });
-            bieren.Add(new Bier { ID = 5, Naam = "Cara pils", Alcohol = 1.5f });
+            return View(bierService.FindAll());
+        }
+
+        public ActionResult Verwijderen(int id)
+        {
+            var bieren = bierService.Read(id);
             return View(bieren);
+        }
+
+        [HttpPost]
+        public ActionResult Delete(int id)
+        {
+            var bier = bierService.Read(id);
+            this.TempData["bier"] = bier;
+            bierService.Delete(id);
+            return Redirect("~/Bier/Verwijderd");
+        }
+
+        public ActionResult Verwijderd()
+        {
+            var bier = (Bier)this.TempData["bier"];
+            return View(bier);
         }
     }
 }

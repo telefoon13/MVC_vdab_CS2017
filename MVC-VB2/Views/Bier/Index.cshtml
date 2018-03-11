@@ -9,7 +9,7 @@
 @foreach (var bier in Model)
 {
     <li>
-        @bier.ID   @bier.Naam / @bier.Alcohol %
+        @Html.DisplayFor(x => bier.ID) @bier.Naam @Html.DisplayFor(x => bier.Alcohol ) <a href="Verwijderen/@bier.ID"><img src="~/Content/Images/delete.png"/></a>
     </li>
 }
 </ul>
