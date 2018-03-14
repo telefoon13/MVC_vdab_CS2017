@@ -135,5 +135,22 @@ namespace MVC_VB2.Controllers
                 return Json(true, JsonRequestBehavior.AllowGet);
             }
         }
+
+        public ActionResult FilterPersonen(string gekozenGelacht = "Allebei")
+        {
+            return View((object)gekozenGelacht);
+        }
+
+        public PartialViewResult GetGefilterdePersonen(string gekozenGeslacht = "Allebei")
+        {
+            IEnumerable<Persoon> personen = persoonService.FindAll();
+            if (gekozenGeslacht != "Allebei")
+            {
+                Geslacht gekozen = (Geslacht)Enum.Parse(typeof(Geslacht), gekozenGeslacht);
+                personen = personen.Where(p => p.Geslacht == gekozen);
+            }
+            return PartialView(personen);
+        }
+
     }
 }

@@ -107,5 +107,10 @@ namespace MVC_VB2.Controllers
             ViewBag.ingetiktwoord = woord;
             return View();
         }
+
+        public PartialViewResult GetTime()
+        {
+            return PartialView(DateTime.Now);
+        }
     }
 }

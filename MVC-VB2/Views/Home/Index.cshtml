@@ -2,6 +2,13 @@
 
 @{
     ViewBag.Title = "Home Page";
+    AjaxOptions ajaxOpts = new AjaxOptions
+    {
+        UpdateTargetId = "update",
+        Url = Url.Action("GetTime"),
+        LoadingElementId = "checking",
+        LoadingElementDuration = 1000
+    };
 }
 
 <div class="jumbotron">
@@ -17,4 +24,29 @@
     <h1>Application state</h1>
     <p class="lead">Deze pagina werd in totaal reeds @HttpContext.Current.Application["aantalBezoeken"] keer bezocht.</p>
     <p><a href="~/Home/WissenApplication" class="btn btn-primary btn-lg">Applicationvariabele wissen &raquo;</a></p>
+</div>
+
+<div class="well">
+    @using (Html.BeginForm())
+    {
+        <div>
+            <p class="lead">Het is nu @DateTime.Now</p>
+            <button type="submit" class="btn btn-primary">Bijwerken</button>
+        </div>
+    }
+</div>
+
+<div class="well">
+    <div id="checking" style="display:none; color:red">
+        <p>Checking the time...</p>
+    </div>
+    <div id="update">
+        @Html.Action("GetTime")
+    </div>
+    @using (Ajax.BeginForm(ajaxOpts))
+    {
+        <div>
+            <button type="submit" class="btn btn-primary">Bijwerken</button>
+        </div>
+    }
 </div>
